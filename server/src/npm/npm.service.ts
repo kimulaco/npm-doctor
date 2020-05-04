@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common'
 import packageJSON from 'package-json'
+import * as packageSize from 'package-size'
 
 const parsePackageJSON = (packageJSON) => {
   return {
@@ -20,10 +21,18 @@ const parsePackageJSON = (packageJSON) => {
 export class NpmService {
   async getPackageJSON(npmName: string): Promise<any> {
     const [name, version] = npmName.split('@')
-    const remotePackageJSON = await packageJSON(name, {
-      version: version || 'latest',
-      fullMetadata: true
-    })
-    return parsePackageJSON(remotePackageJSON)
+    const [remotePackageJSON, npmSize] = await Promise.all([
+      packageJSON(name, {
+        version: version || 'latest',
+        fullMetadata: true
+      }),
+      packageSize(npmName)
+    ])
+    return {
+      ...parsePackageJSON(remotePackageJSON),
+      size: npmSize.size,
+      minifiedSize: npmSize.minified,
+      gzippedSize: npmSize.gzipped,
+    }
   }
 }
