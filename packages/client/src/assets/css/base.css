@@ -47,7 +47,7 @@ a {
   width: 50%;
 }
 .DetailList.-column-2 .DetailList_data {
-  @apply pl-md pr-lg;
+  @apply p-md;
 }
 
 .AppLayout {

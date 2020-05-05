@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "start": "lerna run start --parallel --scope api",
+    "start": "lerna run start --parallel",
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
     "test": "lerna run test"

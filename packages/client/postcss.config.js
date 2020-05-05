@@ -1,22 +1,26 @@
-let pergeConfig = []
+let prodConfig = []
 
 if (process.env.NODE_ENV === 'production') {
-  pergeConfig = ['@fullhuman/postcss-purgecss', {
-      content: [
-        './src/pages/**/*.{js,jsx,ts,tsx}',
-        './src/components/**/*.{js,jsx,ts,tsx}',
-      ],
-      defaultExtractor(content) {
-        return content.match(/[\w-/:]+(?<!:)/g) || []
+  prodConfig = [
+    [
+      '@fullhuman/postcss-purgecss',
+      {
+        content: [
+          './src/pages/**/*.{js,jsx,ts,tsx}',
+          './src/components/**/*.{js,jsx,ts,tsx}'
+        ],
+        defaultExtractor(content) {
+          return content.match(/[\w-/:]+(?<!:)/g) || []
+        }
       }
-    }
+    ]
   ]
 }
 
 module.exports = {
   plugins: [
     'tailwindcss',
-    ...pergeConfig,
+    ...prodConfig,
     'postcss-preset-env'
   ]
 }
