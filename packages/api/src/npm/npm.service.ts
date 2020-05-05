@@ -1,7 +1,7 @@
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common'
 import packageJSON from 'package-json'
 import * as packageSize from 'package-size'
-import { NpmSize, NpmPackage } from '../../../types/npm.types'
+import { NpmSize, NpmPackage } from '../../../../types/npm.types'
 
 @Injectable()
 export class NpmService {

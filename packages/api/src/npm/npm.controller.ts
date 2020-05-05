@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common'
 import { NpmService } from './npm.service'
-import { NpmSize, NpmPackage } from '../../../types/npm.types'
+import { NpmSize, NpmPackage } from '../../../../types/npm.types'
 
 @Controller('api/npm/package')
 export class NpmPackageController {
