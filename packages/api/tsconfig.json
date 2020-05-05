@@ -9,7 +9,17 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true
   },
-  "exclude": ["node_modules", "dist"]
+  "typeRoots": [
+    "./types"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
