@@ -1,13 +1,23 @@
 import { Controller, Get, Param } from '@nestjs/common'
 import { NpmService } from './npm.service'
+import { NpmSize, NpmPackage } from '../../../types/npm.types'
 
-@Controller('api/npm')
-export class NpmController {
-  constructor(private NpmService: NpmService) {}
+@Controller('api/npm/package')
+export class NpmPackageController {
+  constructor(private npmService: NpmService) {}
 
   @Get(':name')
-  async getNPM(@Param('name') name: string): Promise<any> {
-    const packageJSON = await this.NpmService.getPackageJSON(name)
-    return packageJSON
+  getNpmPackage(@Param('name') name: string): Promise<NpmPackage> {
+    return this.npmService.getNpmPackage(name)
+  }
+}
+
+@Controller('api/npm/size')
+export class NpmSizeController {
+  constructor(private npmService: NpmService) {}
+
+  @Get(':name')
+  getNpmSize(@Param('name') name: string): Promise<NpmSize> {
+    return this.npmService.getNpmSize(name)
   }
 }

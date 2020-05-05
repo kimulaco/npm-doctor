@@ -1,38 +1,50 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common'
 import packageJSON from 'package-json'
 import * as packageSize from 'package-size'
-
-const parsePackageJSON = (packageJSON) => {
-  return {
-    name: packageJSON.name,
-    description: packageJSON.description,
-    version: packageJSON.version,
-    repository: packageJSON.repository,
-    keywords: packageJSON.keywords,
-    author: packageJSON.author,
-    maintainers: packageJSON.maintainers,
-    license: packageJSON.license,
-    homepage: packageJSON.homepage,
-    unpackedSize: packageJSON.dist.unpackedSize
-  }
-}
+import { NpmSize, NpmPackage } from '../../../types/npm.types'
 
 @Injectable()
 export class NpmService {
-  async getPackageJSON(npmName: string): Promise<any> {
-    const [name, version] = npmName.split('@')
-    const [remotePackageJSON, npmSize] = await Promise.all([
-      packageJSON(name, {
+  async getNpmPackage(npmName: string): Promise<NpmPackage> {
+    const [name, version]: string[] = npmName.split('@')
+    try {
+      const npmPackage: any = await packageJSON(name, {
         version: version || 'latest',
         fullMetadata: true
-      }),
-      packageSize(npmName)
-    ])
-    return {
-      ...parsePackageJSON(remotePackageJSON),
-      size: npmSize.size,
-      minifiedSize: npmSize.minified,
-      gzippedSize: npmSize.gzipped,
+      })
+      return {
+        name: npmPackage.name,
+        description: npmPackage.description,
+        version: npmPackage.version,
+        repository: npmPackage.repository,
+        license: npmPackage.license,
+        homepage: npmPackage.homepage,
+        unpackedSize: npmPackage.dist.unpackedSize
+      }
+    } catch (error) {
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: 'Failed get package.json of npm.',
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
+
+  async getNpmSize(npmName: string): Promise<NpmSize> {
+    try {
+      const npmSize = await packageSize(npmName, {
+        target: 'node'
+      })
+      return {
+        size: npmSize.size,
+        minifiedSize: npmSize.minified,
+        gzippedSize: npmSize.gzipped
+      }
+    } catch (error) {
+      console.log(error)
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: 'Failed get package size of npm.',
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
 }

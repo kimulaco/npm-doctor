@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common'
-import { NpmController } from './npm.controller'
+import { NpmPackageController, NpmSizeController } from './npm.controller'
 import { NpmService } from './npm.service'
 
 @Module({
-  controllers: [NpmController],
+  controllers: [NpmPackageController, NpmSizeController],
   providers: [NpmService]
 })
 export class NpmModule {}
