@@ -1,4 +1,5 @@
 import React from 'react'
+import '../assets/css/define.css'
 import '../assets/css/base.css'
 
 type Props = {

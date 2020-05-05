@@ -3,3 +3,116 @@
 @tailwind components;
 /* purgecss end ignore */
 @tailwind utilities;
+
+body {
+  line-height: 1.6;
+  @apply bg-gray-100;
+}
+
+a {
+  transition: 0.3s;
+  @apply text-purple-700;
+}
+@media screen and (min-width: 600px) {
+  a:hover,
+  a:focus,
+  a:active {
+    opacity: 0.7;
+  }
+}
+
+.Card {
+  @apply p-md border border-gray-200 rounded-md shadow-lg;
+}
+.Card_name {
+  @apply text-xl font-bold mb-sm;
+}
+
+.DetailList_item {
+  @apply flex;
+}
+.DetailList_title {
+  width: 120px;
+  min-width: 120px;
+  @apply font-bold;
+}
+.DetailList_data {
+  width: calc(100% - 120px);
+  @apply px-md;
+}
+.DetailList.-column-2 {
+  @apply flex flex-wrap;
+}
+.DetailList.-column-2 .DetailList_item {
+  width: 50%;
+}
+.DetailList.-column-2 .DetailList_data {
+  @apply pl-md pr-lg;
+}
+
+.AppLayout {
+  @apply flex flex-col;
+}
+
+.AppHeader {
+  height: 45px;
+  @apply bg-white relative shadow;
+}
+.AppHeader_inner {
+  max-width: var(--content-max-width);
+  @apply px-md py-sm mx-auto;
+}
+.AppHeader_title {
+  line-height: 1.2;
+  @apply text-lg font-medium text-center;
+}
+.AppHeader_link {
+  @apply text-black;
+}
+
+.AppMain {
+  min-height: calc(100vh - 157px);
+  @apply bg-white;
+}
+.AppMain_inner {
+  max-width: var(--content-max-width);
+  @apply pt-lg pb-xl px-md mx-auto;
+}
+
+.AppFooter {
+  height: 112px;
+}
+.AppFooter_inner {
+  max-width: var(--content-max-width);
+  @apply px-md py-lg mx-auto;
+}
+.AppFooter_copyright {
+  line-height: 1.2;
+  @apply text-sm text-center;
+}
+
+.SearchForm {
+  @apply flex justify-center;
+}
+.SearchForm_inner {
+  @apply flex items-end;
+}
+.SearchForm_label {
+  margin-bottom: 8px;
+  @apply inline-block text-gray-700;
+}
+.SearchForm_input {
+  line-height: 1;
+  padding: 6px 12px;
+  height: 50px;
+  @apply text-xl block border rounded-l;
+}
+.SearchForm_button {
+  height: 50px;
+  @apply flex items-center px-sm rounded-r text-white bg-purple-700;
+}
+
+.NpmName {
+  font-size: 36px;
+  @apply font-bold text-center mb-lg;
+}
