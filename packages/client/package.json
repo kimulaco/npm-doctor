@@ -4,6 +4,7 @@
   "author": "kimulaco",
   "private": true,
   "scripts": {
+    "init": "npm i",
     "start": "NODE_ENV=production node server.js",
     "dev": "node server.js",
     "build": "next build",

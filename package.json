@@ -2,8 +2,9 @@
   "name": "npm-doctor",
   "version": "0.0.1",
   "scripts": {
-    "postinstall": "lerna bootstrap",
+    "postinstall": "npm run bootstrap && npm run init",
     "bootstrap": "lerna bootstrap",
+    "init": "lerna run init",
     "start": "lerna run start --parallel",
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",

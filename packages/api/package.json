@@ -4,6 +4,7 @@
   "author": "kimulaco",
   "private": true,
   "scripts": {
+    "init": "npm i",
     "start": "npm run start:prod",
     "prebuild": "rimraf dist",
     "build": "npx nest build",
